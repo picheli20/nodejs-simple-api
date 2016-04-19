@@ -1,0 +1,97 @@
+{
+  "name": "simple-api",
+  "version": "0.1.0",
+  "description": "A best application ever",
+  "keywords": [
+    "simple-api"
+  ],
+  "homepage": "https://github.com/picheli20/simple-api/",
+  "bugs": {
+    "url": "https://github.com/picheli20/simple-api/issues",
+    "email": "contato@fabiopicheli.com"
+  },
+  "licence": "UNLICENCED",
+  "author": {
+    "name": "picheli20",
+    "email": "contato@fabiopicheli.com",
+    "url": "https://github.com/picheli20/simple-api/"
+  },
+  "contributors": [
+    {
+      "name": "picheli20",
+      "email": "contato@fabiopicheli.com",
+      "url": "https://github.com/picheli20/"
+    }
+  ],
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/picheli20/simple-api/"
+  },
+  "scripts": {
+    "test": "grunt spec",
+    "start": "pm2 start production.json",
+    "stop": "pm2 stop production.json",
+    "restart": "pm2 restart production.json",
+    "reload": "pm2 reload production.json",
+    "delete": "pm2 delete production.json"
+  },
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.15.0",
+    "config": "^1.20.1",
+    "cors": "^2.7.1",
+    "ejs": "^2.4.1",
+    "email-templates": "^2.3.0",
+    "express": "^4.13.4",
+    "express-mquery": "^0.2.1",
+    "express-paginate": "^0.2.0",
+    "express-respond": "^0.2.1",
+    "express-winston": "^1.3.0",
+    "helmet": "^1.3.0",
+    "irina": "^0.2.6",
+    "jsonwebtoken": "^5.7.0",
+    "lodash": "^4.11.1",
+    "method-override": "^2.3.5",
+    "mkdir-p": "0.0.7",
+    "mongoose": "^4.4.12",
+    "mongoose-autopopulate": "^0.4.0",
+    "mongoose-hidden": "^0.6.3",
+    "mongoose-searchable": "^1.0.0",
+    "mongoose-timestamp": "^0.5.0",
+    "mongoose-uuid": "0.0.2",
+    "mongoose-valid8": "^0.1.0",
+    "nodemailer": "^2.3.2",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "nodemailer-wellknown": "^0.1.8",
+    "require-all": "^2.0.0",
+    "seed-mongoose": "^0.2.0",
+    "serve-favicon": "^2.3.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "faker": "^3.1.0",
+    "grunt": "^1.0.1",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-express-server": "^0.5.2",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-newer": "^1.2.0",
+    "jshint-stylish": "^2.1.0",
+    "load-grunt-tasks": "^3.5.0",
+    "mocha": "^2.4.5",
+    "mock-express-request": "^0.1.1",
+    "mock-express-response": "^0.1.1",
+    "supertest": "^1.2.0",
+    "time-grunt": "^1.3.0"
+  },
+  "engines": {
+    "node": ">=0.10.3"
+  },
+  "private": true
+}
