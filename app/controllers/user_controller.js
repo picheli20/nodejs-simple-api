@@ -1,12 +1,12 @@
 'use strict';
 
 //dependencies
-var path = require('path');
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var async = require('async');
-var JWT = require(path.join(__dirname, '..', 'libs', 'jwt'));
+var config = require('config');
+var bcrypt = require('bcrypt'); 
+var jwt = require('jsonwebtoken');
 
 /**
  * User Controller
@@ -40,23 +40,23 @@ module.exports = {
      * @param  {HttpResponse} response a http response
      */
     create: function(request, response, next) {
-        request.body.password = request.body.senha;
-        delete request.body.senha;
 
-        if (_.isEmpty(request.body) || _.isEmpty(request.body.email) || _.isEmpty(request.body.password)) {
+        if (_.isEmpty(request.body) || _.isEmpty(request.body.email) || _.isEmpty(request.body.senha)) {
             next(new Error('Invalid create details'));
             return;
         }
 
-        User.find({ 'email': request.body.email }, function (err, resp) {
+        User.find({ 'email': request.body.email }, function (error, resp) {
             if(resp.length > 0){
-                next(new Error('Email already in use'));
+                var err = new Error('E-mail já existente');
+                err.status = 401;
+                next(err);
             }else{
                 var toCreateUser = new User(request.body);
                 
-                toCreateUser.save(function(err, newUser) {
-                    if (err) {
-                        next(err);
+                toCreateUser.save(function(error, newUser) {
+                    if (error) {
+                        next(error);
                     }else{
                         response.json(newUser);
                     }
@@ -74,117 +74,37 @@ module.exports = {
      * @param  {HttpResponse} response http response
      */
     signin: function(request, response, next){
-        //prevent invalid signin details
-        if (_.isEmpty(request.body) || _.isEmpty(request.body.email) || _.isEmpty(request.body.password)) {
-            next(new Error('Invalid signin details'));
+        //prevent Favor informar email e senha
+        if (_.isEmpty(request.body) || _.isEmpty(request.body.email) || _.isEmpty(request.body.senha)) {
+            var err = new Error('Favor informar email e senha');
+            err.status = 400;
+            next(err);
             return;
         }
 
         //normalize email
         request.body.email = request.body.email.toLowerCase();
 
-        async.waterfall([
-            function authenticateUser(then) {
-                User.authenticate(request.body, then);
-            },
-
-            function encodeUserToJWT(User, then) {
-                JWT.encode(User, function afterEncode(error, jwtToken) {
-                    if (error) {
-                        then(error);
-                    } else {
-                        then(null, {
-                            User: User,
-                            token: jwtToken
-                        });
-                    }
-                });
-            }
-
-        ],
-        function done(error, result) {
-            //fail to authenticate User
-            //return error message
-            if (error) {
-                // Set forbidden status code
-                error.status = 403;
-
-                next(error);
-            }
-
-            //User authenticated successfully
-            //token generated successfully 
-            else {
-                response.ok({
-                    success: true,
-                    User: result.User,
-                    token: result.token
-                });
-            }
-
-        });
-
-    },
-
-
-    /**
-     * @function
-     * @name users.show()
-     * @description display a specific user
-     * @param  {HttpRequest} request  a http request
-     * @param  {HttpResponse} response a http response
-     */
-    show: function(request, response, next) {
-        User.findById(request.params.id, function(error, user) {
-                if (error) {
-                    next(error);
-                } else {
-                    response.json(user);
+        User.find({ 'email': request.body.email }, function (error, resp) {
+            if(resp.length === 0){
+                var err = new Error('Usuário e/ou senha inválidos');
+                err.status = 401;
+                next(err);
+            }else if(resp.length === 1){
+                var userCandidate = resp[0];
+                //config.magicWord;
+                //config.SALT_WORK_FACTOR;
+                if(bcrypt.compareSync(request.body.senha, userCandidate.senha)){
+                    var token = jwt.sign({ email : userCandidate.email, date: new Date().getTime() }, config.magicWord, { 'expiresIn' : '30m'});
+                    userCandidate.token = token;
+                    userCandidate.save();
+                    response.json(userCandidate);
+                }else{
+                    var err2 = new Error('Usuário e/ou senha inválidos');
+                    err2.status = 401;
+                    next(err2);
                 }
-            });
+            }
+        });
     },
-
-
-    /**
-     * @function
-     * @name users.update()
-     * @description update a specific user
-     * @param  {HttpRequest} request  a http request
-     * @param  {HttpResponse} response a http response
-     */
-    update: function(request, response, next) {
-        User.findByIdAndUpdate(
-                request.params.id,
-                request.body,
-                {upsert:true,new:true},
-                function(error, user) {
-                    if (error) {
-                        next(error);
-                    } else {
-                        response.json(user);
-                    }
-                });
-    },
-
-
-    /**
-     * @function
-     * @name users.destroy()
-     * @description delete a specific user
-     * @param  {HttpRequest} request  a http request
-     * @param  {HttpResponse} response a http response
-     */
-    destroy: function(request, response, next) {
-        User.findByIdAndRemove(
-                request.params.id,
-                function(error, user) {
-                    if (error) {
-                        next(error);
-                    } else {
-                        response
-                            .json(user);
-                    }
-                });
-    }
-
 };

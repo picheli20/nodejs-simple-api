@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 //var irina = require('irina');
 var bcrypt = require('bcrypt');
-var SALT_WORK_FACTOR = 10;
+var config = require('config');
 
 
 
@@ -60,12 +60,12 @@ var UserSchema = new Schema({
     },
     
     /**
-     * @name password
-     * @description password 
+     * @name senha
+     * @description senha 
      * @type {Object}
      * @private
      */ 
-    password: {
+    senha: {
     
         type: String,
         required: true
@@ -93,9 +93,6 @@ UserSchema.virtual('data_atualizacao').get(function() { return this.updatedAt; }
 // Ensure virtual fields are serialised.
 UserSchema.set('toJSON', {
     virtuals: true
-}, function(fields){
-    console.log(fields);
-    return fields;
 });
 
 UserSchema.pre('save', function(next) {
@@ -107,7 +104,7 @@ UserSchema.pre('save', function(next) {
     }
 
     // generate a salt
-    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    bcrypt.genSalt(config.SALT_WORK_FACTOR, function(err, salt) {
         if (err){
             return next(err);
         }

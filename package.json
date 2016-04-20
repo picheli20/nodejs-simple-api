@@ -30,7 +30,7 @@
   },
   "scripts": {
     "test": "grunt spec",
-    "start": "pm2 start production.json",
+    "start": "grunt prod",
     "stop": "pm2 stop production.json",
     "restart": "pm2 restart production.json",
     "reload": "pm2 reload production.json",
@@ -45,6 +45,7 @@
     "ejs": "^2.4.1",
     "email-templates": "^2.3.0",
     "express": "^4.13.4",
+    "express-jwt": "^3.3.0",
     "express-mquery": "^0.2.1",
     "express-paginate": "^0.2.0",
     "express-respond": "^0.2.1",

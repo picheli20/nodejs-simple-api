@@ -16,6 +16,8 @@ module.exports = {
         return 'http://' + this.ip + ':' + this.port;
     }),
 
+    SALT_WORK_FACTOR : 10,
+    magicWord : 'Im the secret! :D',
 
     /**
      * @description application port
@@ -36,7 +38,7 @@ module.exports = {
      * @type {Object}
      */
     mongoose: {
-        database: 'simple-api-dev',
+        database: 'simple-api-dev2',
         host: '127.0.0.1',
         user: '',
         password: '',

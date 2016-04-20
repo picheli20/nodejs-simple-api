@@ -11,6 +11,9 @@ var expressWinston = require('express-winston');
 var cors = require('cors');
 var helmet = require('helmet');
 var respond = require('express-respond');
+var expressJwt = require('express-jwt');
+var config = require('config'); //load configurations
+
 
 //build logs directory if does not exists
 mkdir.sync(path.join(__dirname, '..', 'logs'));
@@ -40,6 +43,8 @@ app.use(cors());
 
 //use express respond
 app.use(respond());
+
+app.use(expressJwt({ secret: config.magicWord}).unless({ path: [ '/signin', '/signup' ] }));
 
 //configure helmet
 // app.use(helmet.contentSecurityPolicy());
