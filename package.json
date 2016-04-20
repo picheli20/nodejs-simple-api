@@ -30,7 +30,7 @@
   },
   "scripts": {
     "test": "grunt spec",
-    "start": "pm2 start production.json",
+    "start": "node node_modules/gulp/bin/gulp prod",
     "stop": "pm2 stop production.json",
     "restart": "pm2 restart production.json",
     "reload": "pm2 reload production.json",
