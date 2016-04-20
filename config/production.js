@@ -36,11 +36,11 @@ module.exports = {
      * @type {Object}
      */
     mongoose: {
-        database: 'simple-api',
-        host: '127.0.0.1',
-        user: '',
-        password: '',
-        port: 27017,
+        database: 'heroku_g7bnr588',
+        host: 'ds013911.mlab.com',
+        user: 'admin',
+        password: 'admin',
+        port: 13911,
         options: {
             db: {
                 safe: true
