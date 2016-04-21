@@ -36,7 +36,7 @@ Para executar a aplicação em modo de desenvolvimento é só preciso executar o
 $ grunt dev
 ``` 
 
-#Produção
+##Produção
 Para executar a aplicação em modo de produção é só preciso executar o seguinte comando:
 
 ```sh
@@ -44,7 +44,7 @@ $ grunt prod
 ``` 
 
 
-#Testes
+##Testes
 Para executar os testes da aplicação só é preciso executar o seguinte comando:
 
 ```sh
@@ -52,11 +52,11 @@ $ grunt test
 ``` 
 
 
-## Serviços
+# Serviços
 
 Após executar a aplicação no modo desejado você terá 3 serviçoes disponíveis.
 
-# <url>/signin
+## [url]/signin
 
 Este end-point cria um usuário. Ele recebe o seguinte objeto:
 
@@ -87,7 +87,7 @@ Caso o usuário seja criado com sucesso, irá retornar o seguinte objeto criado 
 
 ``` 
 
-# <url>/signup
+## [url]/signup
 
 Este end-point faz o login de um usuário no sistema. Ele recebe o seguinte objeto:
 
@@ -112,9 +112,9 @@ Caso o email exista e a senha seja valida, irá retornar o usuário com código 
 
 ``` 
 
-# <url>/users?page=<page_number>
+## [url]/users?page=[page_number]
 
-Este end-point mostra a lista de todos os usuários listado no sistema. Ele o header Authorization com o seguinte valor: Bearer <código do token>
+Este end-point mostra a lista de todos os usuários listado no sistema. Ele o header Authorization com o seguinte valor: Bearer [código do token]
 
 
 Caso o token seja válido, irá retornar um objeto com a lista de objetos e o código 200:
@@ -122,10 +122,10 @@ Caso o token seja válido, irá retornar um objeto com a lista de objetos e o c�
 ``` json
 {
   "users": [
-    <user object>
+    [user object]
   ],
   "pages": Number,
-  "count": Numberee
+  "count": Number
 }
 
 ``` 
