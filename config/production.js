@@ -40,8 +40,8 @@ module.exports = {
      * @type {Object}
      */
     mongoose: {
-        database: 'heroku_g7bnr588',
-        host: 'ds013911.mlab.com',
+        database: 'heroku_tzts1s2c',
+        host: 'ds013971.mlab.com',
         user: 'admin',
         password: 'admin',
         port: 13911,
