@@ -71,6 +71,19 @@ var UserSchema = new Schema({
         required: true
     
     },
+    
+    /**
+     * @name ultimoLogin
+     * @description ultimoLogin 
+     * @type {Object}
+     * @private
+     */ 
+    ultimoLogin: {
+    
+        type: String,
+        required: true
+    
+    },
 
 
     /**
@@ -87,8 +100,8 @@ var UserSchema = new Schema({
 });
 
 UserSchema.virtual('id').get(function() { return this._id; });
-UserSchema.virtual('data_criacao').get(function() { return this.createdAt; });
-UserSchema.virtual('data_atualizacao').get(function() { return this.updatedAt; });
+UserSchema.virtual('dataCriacao').get(function() { return this.createdAt; });
+UserSchema.virtual('dataAtualizacao').get(function() { return this.updatedAt; });
 
 // Ensure virtual fields are serialised.
 UserSchema.set('toJSON', {

@@ -18,6 +18,7 @@ module.exports = {
 
     SALT_WORK_FACTOR : 10,
     magicWord : 'Im the secret! :D',
+    tokenExpiration : '30m',
 
     /**
      * @description application port

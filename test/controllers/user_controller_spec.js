@@ -4,7 +4,7 @@
  * User controller specification
  *
  * @description :: Server-side controller specification for User
- */
+ *
 
 //dependencies
 var path = require('path');
@@ -16,7 +16,7 @@ var Response = require('mock-express-response');
 var UserController = require(path.join(__dirname, '..', '..', 'app', 'controllers', 'user_controller'));
 
 var _user_;
-
+/*
 describe('User Controller', function() {
     before(function(done) {
         var __user__ = {
@@ -237,3 +237,5 @@ describe('User Controller', function() {
     });
 
 });
+
+*/
