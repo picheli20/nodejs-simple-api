@@ -1,7 +1,7 @@
 Simple API
 ======================
 
-# Getting Started
+A aplicação foi feita utilizando o seguite Yeoman gerador: [Generator-Mvp](https://github.com/lykmapipo/generator-mvp)
 
 ## Instalação
 
