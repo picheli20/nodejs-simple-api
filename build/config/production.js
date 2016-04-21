@@ -1,0 +1,128 @@
+'use strict';
+
+//dependencies
+var defer = require('config/defer').deferConfig;
+
+/**
+ * @description default configurations
+ * @type {Object}
+ */
+module.exports = {
+    /**
+     * @description default application base url
+     * @type {String}
+     */
+    baseUrl: defer(function() {
+        return 'http://' + this.ip + ':' + this.port;
+    }),
+
+    SALT_WORK_FACTOR : 10,
+    magicWord : 'Im the secret! :D',
+    tokenExpiration : '30m',
+
+
+    /**
+     * @description application port
+     * @type {Number}
+     */
+    port: 3000,
+
+
+    /**
+     * @description application ip address
+     * @type {String}
+     */
+    ip: '127.0.0.1',
+
+
+    /**
+     * @description mongoose database configurations
+     * @type {Object}
+     */
+    mongoose: {
+        database: 'heroku_tzts1s2c',
+        host: 'ds013971.mlab.com',
+        user: 'admin',
+        password: 'admin',
+        port: 13911,
+        options: {
+            db: {
+                safe: true
+            },
+            server: {
+                socketOptions: {
+                    keepAlive: 1
+                }
+            },
+            replset: {
+                socketOptions: {
+                    keepAlive: 1
+                }
+            }
+        }
+    },
+
+
+    /**
+     *@description logger configurations
+     */
+    logger: {
+        dir: 'logs',
+        level: 'silly',
+        file: 'logs.json'
+    },
+
+    /**
+     * @description json web token configuration
+     * @type {Object}
+     */
+    jwt: {
+        /**
+         * @description a secret to be used on encoding and decoding jwt
+         * @type {String}
+         */
+        secret: '78+3fsw9_4n13.hs~ns*ma42#@!`',
+
+        /**
+         * @description an algorithm to be used on encoding and decoding jwt
+         * @type {String}
+         */
+        algorithm: 'HS256',
+
+        /**
+         * @description lifespan of jwt
+         * @type {String}
+         */
+        expiresIn: '7 days',
+
+        /**
+         * @description intended audience for jwt
+         * @type {String}
+         */
+        audience: 'simple-api',
+
+        /**
+         * @description allow payload to be parsed as json
+         * @type {Boolean}
+         */
+        json: true
+    },
+
+
+    /**
+     * @description sendgrid configurations
+     * @type {Object}
+     */
+    /*jshint camelcase:false*/
+    mailer: {
+        from: 'simple-api <no-reply@simple-api.com>',
+        sender: 'The simple-api Team',
+        transport: {
+            auth: {
+                api_key: '<sendgrid api key>',
+            }
+        }
+    }
+    /*jshint camelcase:true*/
+
+};

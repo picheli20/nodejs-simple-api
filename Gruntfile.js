@@ -63,7 +63,7 @@ module.exports = function(grunt) {
                     script: 'server.js',
                     /* jshint ignore:start */
                     node_env: 'development'
-                        /* jshint ignore:end */
+                    /* jshint ignore:end */
                 }
             },
             prod: {
@@ -187,7 +187,29 @@ module.exports = function(grunt) {
                     '<%= project.test %>/libs/**/*.js'
                 ]
             }
-        }
+        },
+        
+        uglify: {
+            options: {},
+            build: {
+                files: {
+                    'build/build.min.js': [
+                        'server.js',
+                        '<%= project.app %>/**/*.js',
+                        '<%= project.appConfig %>/**/*.js'
+                    ],
+                }
+            }
+        },
+        copy: {
+            main: {
+                files: [
+                    {expand: true, src: ['app/**'], dest: 'build', filter: 'isFile'},
+                    {expand: true, src: ['server.js'], dest: 'build', filter: 'isFile'},
+                    {expand: true, src: ['config/production.js'], dest: 'build', filter: 'isFile'},
+                ],
+            },
+        },
 
     });
 
