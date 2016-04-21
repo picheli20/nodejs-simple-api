@@ -30,7 +30,7 @@
   },
   "scripts": {
     "test": "grunt spec",
-    "start": "grunt prod",
+    "start": "./node_modules/grunt-cli/bin/grunt dev",
     "stop": "pm2 stop production.json",
     "restart": "pm2 restart production.json",
     "reload": "pm2 reload production.json",
@@ -75,6 +75,7 @@
     "chai": "^3.5.0",
     "faker": "^3.1.0",
     "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
     "grunt-concurrent": "^2.3.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
