@@ -30,8 +30,8 @@
   },
   "scripts": {
     "test": "grunt spec",
-    "postinstall": "npm install -g grunt-cli",
-    "start": "./node_modules/grunt-cli/bin/grunt dev",
+    "postinstall": "grunt dev"
+    "start": "grunt dev",
     "stop": "pm2 stop production.json",
     "restart": "pm2 restart production.json",
     "reload": "pm2 reload production.json",
