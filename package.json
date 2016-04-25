@@ -30,7 +30,7 @@
   },
   "scripts": {
     "test": "grunt spec",
-    "postinstall": "grunt dev"
+    "postinstall": "grunt dev",
     "start": "grunt dev",
     "stop": "pm2 stop production.json",
     "restart": "pm2 restart production.json",
